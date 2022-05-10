@@ -110,6 +110,9 @@ app.get('/api/animals/', (req, res) => {
       }
   });
 
+  app.get('/', (req, res) => {
+      res.sendFile(path.join(__dirname, './public/zookeeper-public/index.html'));
+  });
 
 
   app.listen(PORT, () => {
