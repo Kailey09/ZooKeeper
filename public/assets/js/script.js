@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const $animalForm = document.querySelector('#animal-form');
 const $zookeeperForm = document.querySelector('#zookeeper-form');
 
@@ -29,34 +27,33 @@ const handleAnimalFormSubmit = event => {
   }
   const animalObject = { name, species, diet, personalityTraits };
 
-  fetch('/api/animals', {
+  fetch('api/animals', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-type': 'applicaton/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(animalObject)
   })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    alert('Error:' + response.statusText);
-  })
-  .then(postResponse => {
-    console.log(postResponse);
-    alert('Thank you for adding an animal!');
-  });
-
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      alert('Error: ' + response.statusText);
+    })
+    .then(postResponse => {
+      console.log(postResponse);
+      alert('Thank you for adding an animal!');
+    });
 };
 
-const handleZookeeperFormSubmit  = event => {
+const handleZookeeperFormSubmit = event => {
   event.preventDefault();
 
-  //get zookeeper data and organize it 
+  // get zookeeper data and organize it
   const name = $zookeeperForm.querySelector('[name="zookeeper-name"]').value;
-  age = parseInt($zookeeperForm.querySelector('[name="age"]').value);
-  favoriteAnimal = $zookeeperForm.querySelector('[name="favorite-animal"]').value;
+  const age = parseInt($zookeeperForm.querySelector('[name="age"]').value);
+  const favoriteAnimal = $zookeeperForm.querySelector('[name="favorite-animal"]').value;
 
   const zookeeperObj = { name, age, favoriteAnimal };
   console.log(zookeeperObj);
@@ -64,20 +61,21 @@ const handleZookeeperFormSubmit  = event => {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type' : 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(zookeeperObj)
   })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    alert('Error: ' + response.statusText);
-  })
-  .then(postResponse => {
-    console.log(postResponse);
-    alert('Thank you for adding a zookeeper!');
-  });
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      alert('Error: ' + response.statusText);
+    })
+    .then(postResponse => {
+      console.log(postResponse);
+      alert('Thank you for adding a zookeeper!');
+    });
 };
 
 $animalForm.addEventListener('submit', handleAnimalFormSubmit);
+$zookeeperForm.addEventListener('submit', handleZookeeperFormSubmit);
